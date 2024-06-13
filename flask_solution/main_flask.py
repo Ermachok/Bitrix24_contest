@@ -1,5 +1,5 @@
 from flask import Flask, request, send_file
-from utils import create_video
+from bitrix_contest.utils.utils import create_video
 
 app = Flask(__name__)
 
