@@ -1,8 +1,8 @@
-from django.http import FileResponse
+from django.http import FileResponse, HttpRequest
 from utils.utils import create_video
 
 
-def create_video_with_caption(request):
+def create_video_with_caption(request: HttpRequest):
     text = request.GET.get('text')
 
     video_file = create_video(text)
