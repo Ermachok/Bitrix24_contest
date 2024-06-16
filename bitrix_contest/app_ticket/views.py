@@ -22,7 +22,7 @@ def create_video(text: str, duration: float = 3,
     for i, char in enumerate(text):
         cur_text += char
 
-        char_clip = TextClip(cur_text, fontsize=30, color='white', bg_color='black').set_position(
+        char_clip = TextClip(cur_text, fontsize=30, font="Ubuntu", color='white', bg_color='black').set_position(
             ('center', 'center')).set_duration(char_clip_duration).set_start(i * char_clip_duration)
         if char_clip.size[0] > window_size[0]:
             cur_text = cur_text[1:]
