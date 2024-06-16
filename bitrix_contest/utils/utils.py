@@ -2,7 +2,7 @@ from moviepy.editor import TextClip, ColorClip, CompositeVideoClip
 
 
 def create_video(text: str, duration: float = 3,
-                              window_size: tuple = (100, 100)) -> CompositeVideoClip:
+                 window_size: tuple = (100, 100)) -> CompositeVideoClip:
     """
     Func for making video
     :param text: input text
@@ -28,6 +28,3 @@ def create_video(text: str, duration: float = 3,
     final_clip = CompositeVideoClip([background] + char_clips, size=window_size)
 
     return final_clip
-
-
-

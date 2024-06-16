@@ -6,6 +6,7 @@ click==8.1.7
 decorator==4.4.2
 Django==5.0.6
 Flask==3.0.3
+gunicorn==22.0.0
 idna==3.7
 imageio==2.34.1
 imageio-ffmpeg==0.5.1
@@ -15,6 +16,7 @@ MarkupSafe==2.1.5
 moviepy==1.0.3
 numpy==1.26.4
 opencv-python==4.10.0.82
+packaging==24.1
 pillow==10.3.0
 proglog==0.1.10
 requests==2.32.3
