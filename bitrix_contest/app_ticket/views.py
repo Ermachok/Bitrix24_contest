@@ -7,30 +7,24 @@ from app_ticket.models import RequestData
 log = logging.getLogger(__name__)
 
 
-def create_video(text: str, duration: float = 3,
-                 window_size: tuple = (100, 100)) -> CompositeVideoClip:
-    """
-    Func for making video
-    :param text: input text
-    :param duration: video duration
-    :param window_size: size of window
-    :return: video clip
-    """
+def create_video(text: str, duration_sec: float = 3, window_size: tuple = (100, 100), fps=50) -> CompositeVideoClip:
+    width, height = window_size[0], window_size[1]
+    x, y = width, height // 2
+
+    frames = int(fps * duration_sec)
+    fontsize = 30
+    symbols_in_window = int(width/fontsize)
+    per_symbol = width / symbols_in_window
+    all_distance = 2 * len(text) // symbols_in_window * per_symbol + width
+    step_size = all_distance / frames
+
     char_clips = []
-    cur_text = ''
-    char_clip_duration = duration / (len(text))
-    for i, char in enumerate(text):
-        cur_text += char
-
-        char_clip = TextClip(cur_text, fontsize=30, font="Ubuntu", color='white', bg_color='black').set_position(
-            ('center', 'center')).set_duration(char_clip_duration).set_start(i * char_clip_duration)
-        if char_clip.size[0] > window_size[0]:
-            cur_text = cur_text[1:]
-
+    for t in range(frames):
+        x -= step_size
+        char_clip = TextClip(text, fontsize=fontsize, font="Ubuntu", color='white', bg_color='black').set_position((x, y)).set_duration(1 / fps).set_start(t / fps)
         char_clips.append(char_clip)
 
-    background = ColorClip(window_size, color=(0, 0, 0), duration=duration)
-
+    background = ColorClip(window_size, color=(0, 0, 0), duration=duration_sec)
     final_clip = CompositeVideoClip([background] + char_clips, size=window_size)
 
     return final_clip
